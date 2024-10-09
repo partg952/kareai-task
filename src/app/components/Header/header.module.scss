@@ -1,0 +1,25 @@
+.headerWrapper {
+    height: 250px;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // background-color: blue;
+    float: right;
+    padding:10px;
+    margin-top: 0;
+    .progressTopics {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        bottom: 0;
+        background-color: red;
+        .topicItem {
+            display: flex;
+            *{
+                margin: 10px;
+            }
+        }
+    }
+}
