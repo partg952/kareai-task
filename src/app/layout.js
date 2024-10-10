@@ -6,7 +6,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { NextUIProvider } from "@nextui-org/react";
 import { Inter } from "next/font/google";
 import { context } from "./contextProvider";
-import contextProvider from "./contextProvider";
+import ContextProvider from "./contextProvider";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -34,11 +34,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
       >
         <NextUIProvider>
-          <contextProvider>
+          <ContextProvider>
             <Header />
             <Sidebar />
             <div className="childrenWrapper">{children}</div>
-          </contextProvider>
+          </ContextProvider>
         </NextUIProvider>
       </body>
     </html>

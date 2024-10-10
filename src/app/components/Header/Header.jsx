@@ -2,6 +2,8 @@
 import React from "react";
 import styles from "./header.module.scss";
 import { Progress } from "@nextui-org/react";
+import { useContext } from "react";
+import {Context} from '../../contextProvider';
 const topics = [
   "Platform",
   "Company",
@@ -11,6 +13,8 @@ const topics = [
   "Publish",
 ];
 function Header() {
+  const {progress,setProgress} = useContext(Context);
+  console.log(progress)
   return (
     <div className={styles.headerWrapper}>
       <h1>AI Social Media</h1>
@@ -24,7 +28,7 @@ function Header() {
           ))}
         </div>
       </div>
-      <Progress aria-label="Loading..." value={16.66} color="success" size="md"/>
+      <Progress aria-label="Loading..." value={progress} color="success" size="md"/>
     </div>
   );
 }

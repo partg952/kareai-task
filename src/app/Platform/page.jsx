@@ -4,11 +4,12 @@ import { useRouter } from 'next/navigation';
 import styles from './platform.module.scss';
 import {Card,CardBody,Button,Checkbox,CheckboxGroup} from '@nextui-org/react';
 import { useContext } from 'react';
-import { context } from '../contextProvider';
+import { Context } from '../contextProvider';
+import NextButton from '../components/NextButton';
 function Platform() {
   const router = useRouter();
-  const contextValue = useContext(context);
-  console.log(contextValue)
+  const {progress,setProgress} = useContext(Context);
+  console.log(progress)
   return (
     <div className = {styles.platformWrapper}>
       <Card className="w-full max-w-lg p-4">
@@ -22,10 +23,7 @@ function Platform() {
             <Checkbox value='x'>X</Checkbox>
             <Checkbox value='linkedin'>Linkedin</Checkbox>
           </CheckboxGroup>
-          <Button onClick={() => {
-            
-            router.push("/Company")
-            }} className = 'my-5 bg-purple-400 text-white w-full' >Next</Button>
+          <NextButton destRoute={'/Company'}/> 
         </CardBody>
       </Card>
     </div>
