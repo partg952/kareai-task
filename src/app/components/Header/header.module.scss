@@ -1,10 +1,9 @@
 .headerWrapper {
-    height: 250px;
-    width: 80vw;
+    height: 20vh;
+    width: 83vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // background-color: blue;
     float: right;
     padding:10px;
     margin-top: 0;
@@ -14,9 +13,22 @@
         justify-content: space-around;
         width: 100%;
         bottom: 0;
-        background-color: red;
         .topicItem {
+            
             display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p {
+                background-color: rgba(128, 0, 128, 0.493);
+                border-radius: 20px;
+                text-align: center;
+                color: white;
+                font-size: small;
+                padding: 10px;
+                height: 40px;
+                width: 40px;
+            }
             *{
                 margin: 10px;
             }

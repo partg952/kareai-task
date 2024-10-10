@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-family: var(--font-geist-mono);
+  /* overflow-y: hidden; */
+}
+div.childrenWrapper {
+  height: 80vh;
+  width: 80vw;
+  float: right;
+}

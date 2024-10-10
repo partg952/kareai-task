@@ -24,7 +24,7 @@ function Header() {
           ))}
         </div>
       </div>
-      <Progress aria-label="Loading..." value={60} color="success" size="lg"/>
+      <Progress aria-label="Loading..." value={16.66} color="success" size="md"/>
     </div>
   );
 }

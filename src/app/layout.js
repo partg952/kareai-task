@@ -2,7 +2,15 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { NextUIProvider } from "@nextui-org/react";
+import { Inter } from "next/font/google";
+import { context } from "./contextProvider";
+import contextProvider from "./contextProvider";
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -23,14 +31,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased`}
       >
         <NextUIProvider>
-          <Header />
-          <Sidebar />
-          {children}
+          <contextProvider>
+            <Header />
+            <Sidebar />
+            <div className="childrenWrapper">{children}</div>
+          </contextProvider>
         </NextUIProvider>
       </body>
     </html>
   );
 }
+
+
