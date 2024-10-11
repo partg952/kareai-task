@@ -16,16 +16,16 @@ import { Cancel, Edit } from "@mui/icons-material";
 function ScheduledPosts() {
     const value = useContext(Context);
     const data = [{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"},{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"},{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"}]
-    value.finalData!=undefined && data.push({
-        platform:value.finalData.platform.join(","),
-        products : "service1:"+value.finalData.company.toString(),
+    data.push({
+        platform:value.finalData.platform!=undefined && value.finalData.platform.join(","),
+        products : value.finalData.company!=undefined && "service1:"+value.finalData.company.toString(),
         campaign : value.finalData.objective,
         scheduleTime : value.finalData.time,
         period:value.finalData.duration
     })
   return (
     <div className="*:my-7">
-      <h1 className="text-3xl"><b>Manage Scheduled Posts</b></h1>
+      <h1 className="text-3xl"><h1><b>Manage Scheduled Posts</b></h1>
       <p>
         Current System Time :{" "}
         {new Date().toLocaleString("en-US", {
