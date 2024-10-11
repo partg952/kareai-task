@@ -11,7 +11,6 @@ function Platform() {
   const router = useRouter();
   const value = useContext(Context);
   const [checkBoxData,setData] = useState([]);
-  console.log(value)
   return (
     <div className = {styles.platformWrapper}>
       <Card className="w-full max-w-lg p-4">
@@ -22,7 +21,6 @@ function Platform() {
           </div>
           <p className = "my-5 w-full">Choose the social media platforms you would like to publish your post.Feel free to select multiple platforms at once</p>
           <CheckboxGroup onChange={e => {
-            console.log(e);
             setData(e)
           }} >
             <Checkbox value='x'>X</Checkbox>

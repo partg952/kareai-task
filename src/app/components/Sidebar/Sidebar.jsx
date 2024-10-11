@@ -6,8 +6,8 @@ function Sidebar() {
   return (
     <div className={styles.sidebarWrapper}>
         {
-            options.map(item => (
-                <div className={styles.sidebarOptions}>
+            options.map((item,i) => (
+                <div key={i} className={styles.sidebarOptions}>
                     <p>{item}</p>
                 </div>
             ))

@@ -39,8 +39,8 @@ function ScheduledPosts() {
         </TableHeader>
         <TableBody>
          {
-            data.map(item => (
-                <TableRow>
+            data.map((item,i) => (
+                <TableRow key={i}>
                     <TableCell>{item.platform}</TableCell>
                     <TableCell>{item.products}</TableCell>
                     <TableCell>{item.campaign}</TableCell>

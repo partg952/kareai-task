@@ -14,14 +14,13 @@ const topics = [
 ];
 function Header() {
   const {progress,setProgress} = useContext(Context);
-  console.log(progress)
   return (
     <div className={styles.headerWrapper}>
       <h1>AI Social Media</h1>
       <div>
         <div className={styles.progressTopics}>
           {topics.map((topic, i) => (
-            <div className={styles.topicItem}>
+            <div key={i} className={styles.topicItem}>
               <p>{i + 1}</p>
               <h4>{topic}</h4>
             </div>

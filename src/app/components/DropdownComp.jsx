@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import {useState} from 'react';
-function DropdownComp({title,modalTitle,modalOptions,dropdownOptions}) {
+function DropdownComp({title,modalTitle,modalOptions,dropdownOptions,setData,data}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [option,selectedOption] = useState(title)
   return (
@@ -36,8 +36,8 @@ function DropdownComp({title,modalTitle,modalOptions,dropdownOptions}) {
               </ModalHeader>
               <ModalBody>
                 {
-                  modalOptions.map(item => (
-                    <Button>{item}</Button>
+                  modalOptions.map((item,i) => (
+                    <Button key={i}>{item}</Button>
                   ))
                 }
               </ModalBody>
@@ -60,10 +60,11 @@ function DropdownComp({title,modalTitle,modalOptions,dropdownOptions}) {
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions" className="w-full max-w-lg">
           {
-            dropdownOptions.map(item => 
+            dropdownOptions.map((item,i) => 
             (
-              <DropdownItem onPress={() => {
+              <DropdownItem key={i} onPress={() => {
                 selectedOption(item);
+                setData(item)
               }}>{item}</DropdownItem>
             )
             )
