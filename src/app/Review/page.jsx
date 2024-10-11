@@ -14,7 +14,7 @@ function Review() {
     <div className="flex items-center justify-center">
       <Card className="w-full max-w-lg p-2 flex flex-col justify-center items-center *:my-3">
         <CardBody>
-          <h3 className="my-3 text-2xl">Review your Content</h3>
+          <h3 className="my-3 text-2xl"><b>Review your Content</b></h3>
           <p className="my-3">
             Start by selecting a company and product or create new ones at
             BrandCentre in a few clicks

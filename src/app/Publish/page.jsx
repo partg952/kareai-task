@@ -30,7 +30,7 @@ function Publish() {
     <div className="flex items-center justify-center">
       <Card className="w-full max-w-lg p-2 flex flex-col justify-center items-center">
         <CardBody>
-          <h3 className="my-3 text-2xl">When to Publish</h3>
+          <h3 className="my-3 text-2xl"><b>When to Publish</b></h3>
           <p>
             Choose date and time to publish your poet.You can change your
             timezone in the profile settings

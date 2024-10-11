@@ -25,7 +25,7 @@ function ScheduledPosts() {
     })
   return (
     <div className="*:my-7">
-      <h1 className="text-3xl">Manage Scheduled Posts</h1>
+      <h1 className="text-3xl"><b>Manage Scheduled Posts</b></h1>
       <p>
         Current System Time :{" "}
         {new Date().toLocaleString("en-US", {
