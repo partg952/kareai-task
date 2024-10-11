@@ -16,8 +16,8 @@ import { Cancel, Edit } from "@mui/icons-material";
 function ScheduledPosts() {
     const value = useContext(Context);
     const data = [{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"},{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"},{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"}]
-    data.push({
-        platform:value.finalData.platforms!=undefined && value.finalData.platform.join(","),
+    value.finalData!=undefined && data.push({
+        platform:value.finalData.platform.join(","),
         products : "service1:"+value.finalData.company.toString(),
         campaign : value.finalData.objective,
         scheduleTime : value.finalData.time,
