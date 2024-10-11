@@ -1,10 +1,15 @@
 "use client";
 import React from "react";
 import { Card, CardBody, Textarea, Switch,Button } from "@nextui-org/react";
-import { useState } from "react";
+import { useState ,useContext} from "react";
+import {useRouter} from 'next/navigation';
+import {Context} from '../contextProvider';
+import { Router } from "next/router";
 function Review() {
   const [value, setValue] = useState("");
   const [on,setOn] = useState(true);
+  const {progress,setProgress} = useContext(Context);
+  const router = useRouter();
   return (
     <div className="flex items-center justify-center">
       <Card className="w-full max-w-lg p-2 flex flex-col justify-center items-center *:my-3">
@@ -24,7 +29,10 @@ function Review() {
             },2000)
             
             }} color="default" className="my-3">Send a copy to my email address</Switch>
-          <Button className="w-full max-w-lg bg-purple-400 rounded-3xl text-white" isDisabled = {on}>Next</Button>
+          <Button className="w-full max-w-lg bg-purple-400 rounded-3xl text-white" isDisabled = {on} onPress={() =>  {
+              setProgress((prev) => prev+16.66);
+              router.push("/Publish")
+          } }>Next</Button>
         </CardBody>
       </Card>
     </div>
