@@ -14,9 +14,14 @@ import {
 } from "@nextui-org/react";
 import NextButton from "../components/NextButton";
 import { useState } from "react";
+import { ContactSupportOutlined } from "@mui/icons-material";
 function Publish() {
+  const [repeat,setRepeat] = useState(false);
+  const [date,setDate] = useState(new Date().getDate());
+  const [time,setTime] = useState();
   const getTime = () =>{
-    return new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric',second:'numeric', hour12: true })
+    return new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric',second:'numeric', hour12: true });
+    
   }
 
 
@@ -31,7 +36,7 @@ function Publish() {
             timezone in the profile settings
           </p>
           <div className="flex items-center justify-between my-5">
-            <Switch>Repeat</Switch>
+            <Switch onChange={() => setRepeat(!repeat)}>Repeat</Switch>
             <Dropdown>
               <DropdownTrigger>
                 <Button variant="outlined">{option}</Button>
@@ -50,11 +55,28 @@ function Publish() {
             </Dropdown>
           </div>
           <div className="max-w-lg w-full flex items-center justify-center">
-            <Calendar />
+            <Calendar onChange={e => {
+                console.log(e.toDate());
+                setDate(e.toDate());
+            }} />
           </div>
           <p className="mx-auto my-5">Time (UTC) Current System Time : {getTime()}</p>
-          <TimeInput className="max-w-lg w-full p-3 text-center"/>
-          <NextButton destRoute={'/ScheduledPosts'}/>
+          <TimeInput className="max-w-lg w-full p-3 text-center" onChange={e => {
+            console.log(e.hour+":"+e.minute+":"+e.second);
+            let hour = e.hour.toString().length == 1 ? "0"+e.hour.toString() : e.hour.toString();
+            let minutes = e.minute.toString().length == 1 ? "0"+e.minute.toString() : e.minute.toString();
+            let seconds = e.minute.toString().length == 1 ? "0"+e.minute.toString() : e.minute.toString();
+            
+            console.log(hour + ":" + minutes + ":" + seconds);
+            let finalTime = hour + ":" + minutes + ":" + seconds;
+            setTime(finalTime);
+          }}/>
+          <NextButton destRoute={'/ScheduledPosts'} data={{
+            repeat:repeat,
+            duration : option,
+            date : date,
+            time:time
+          }}/>
         </CardBody>
       </Card>
     </div>

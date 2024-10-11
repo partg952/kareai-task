@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
 import { Card, CardBody, Textarea,Button } from "@nextui-org/react";
-import {useState} from 'react';
+import {useState,useRef} from 'react';
 import Image from "next/image";
 import NextButton from "../components/NextButton";
 import StartImage from '../assets/star.png'
 import DropdownComp from "../components/DropdownComp";
 function Campaign() {
   const [thinking,setThinking] = useState(false);
+  const [objective,setObjective] = useState("");
+  const textRef = useRef();
   const thinkButtonClicked = () => {
     setThinking(true)
     setTimeout(() => {
@@ -46,6 +48,8 @@ function Campaign() {
             title={"What is the primary objective of the Campaign"}
             modalOptions={options}
             dropdownOptions={options}
+            data={objective}
+            setData={setObjective}
           />
           <div className="flex justify-between items-center">
             <p className="my-5">
@@ -55,8 +59,8 @@ function Campaign() {
               <Image height={30} src={StartImage}/>
             </Button>
           </div>
-          <Textarea defaultValue="Woman aged 25-40 \n Income level of $50,000-$100,000 per year Interest in sustainable fashion active on social media platforms small to medium sized bussiness decision makres in IT departments Ages" />
-          <NextButton destRoute={'/Content'}/>
+          <Textarea ref={textRef} defaultValue="Woman aged 25-40 \n Income level of $50,000-$100,000 per year Interest in sustainable fashion active on social media platforms small to medium sized bussiness decision makres in IT departments Ages" />
+          <NextButton destRoute={'/Content'} data={{targetAudience : textRef.current!=undefined && textRef.current.value,objective:objective}}/>
         </CardBody>
 
       </Card>

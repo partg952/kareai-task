@@ -7,8 +7,8 @@ import {Context} from '../contextProvider';
 import { Router } from "next/router";
 function Review() {
   const [value, setValue] = useState("");
-  const [on,setOn] = useState(true);
-  const {progress,setProgress} = useContext(Context);
+  const [on,setOn] = useState(false);
+  const {progress,setProgress,finalData,addData} = useContext(Context);
   const router = useRouter();
   return (
     <div className="flex items-center justify-center">
@@ -25,13 +25,17 @@ function Review() {
           <Switch onChange={(e) => {
             setTimeout(() => {
                 setValue("are you ready to revoltunise your business process with cutting-edge solutions from rockstar games ? Introducing our latest campaign ,demand gen for b2b saas,featuring the groundbreaking gta 6.this isnt just a game its a robust platform designed to solve real world challenged for small to medium sized tech businesses as an it manager you know the importance of streamlining operations yet you're faced with the daily hurdles of ineffecient software")
-                setOn(false)
+                setOn(true)
             },2000)
             
             }} color="default" className="my-3">Send a copy to my email address</Switch>
-          <Button className="w-full max-w-lg bg-purple-400 rounded-3xl text-white" isDisabled = {on} onPress={() =>  {
-              setProgress((prev) => prev+16.66);
+          <Button className="w-full max-w-lg bg-purple-400 rounded-3xl text-white" isDisabled = {!on} onPress={() =>  {
+              addData({...finalData,...{
+                reviewContent:value,
+                sendEmail:on
+              }});
               router.push("/Publish")
+              
           } }>Next</Button>
         </CardBody>
       </Card>

@@ -18,7 +18,7 @@ function Company() {
 
   const router = useRouter();
   return (
-    <div className="flex justify-center items-center">
+    <div  className="flex justify-center items-center">
       <Card className="w-full max-w-lg p-2 flex flex-col justify-center items-center">
         <CardBody>
           <div className="flex justify-between items-center">

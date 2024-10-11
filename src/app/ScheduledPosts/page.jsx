@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { useContext } from "react";
 import {
   Table,
   TableHeader,
@@ -11,11 +11,18 @@ import {
 } from "@nextui-org/react";
 import CreateIcon from "@mui/icons-material/Create";
 import CloseIcon from "@mui/icons-material/Close";
+import { Context } from "../contextProvider";
 import { Cancel, Edit } from "@mui/icons-material";
 function ScheduledPosts() {
-
+    const value = useContext(Context);
     const data = [{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"},{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"},{platform : "Linkedin",products:"service1:magicai",campaign:"test",scheduleTime:"03:01:00",period:"weekly"}]
-
+    data.push({
+        platform:value.finalData.platform.join(","),
+        products : "service1:"+value.finalData.company.toString(),
+        campaign : value.finalData.objective,
+        scheduleTime : value.finalData.time,
+        period:value.finalData.duration
+    })
   return (
     <div className="*:my-7">
       <h1 className="text-3xl">Manage Scheduled Posts</h1>

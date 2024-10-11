@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation';
-import styles from './platform.module.scss';
 import {Card,CardBody,Button,Checkbox,CheckboxGroup} from '@nextui-org/react';
 import { useContext } from 'react';
 import { useRef } from 'react';
@@ -12,7 +11,7 @@ function Platform() {
   const value = useContext(Context);
   const [checkBoxData,setData] = useState([]);
   return (
-    <div className = {styles.platformWrapper}>
+    <div className = {'flex justify-center items-center'}>
       <Card className="w-full max-w-lg p-4">
         <CardBody>
           <div className = "flex justify-between items-center">

@@ -12,7 +12,7 @@ import {
   DropdownTrigger,
   Input
 } from "@nextui-org/react";
-import { useState } from "react";
+import { useState,useRef} from "react";
 
 import Image from "next/image";
 import StarImage from "../assets/star.png";
@@ -21,6 +21,9 @@ function Content() {
   const [thinking, setThinking] = useState(false);
   const [topics, setTopics] = useState("");
   const [option, setOption] = useState("Professional");
+  const [seo,setSeo] = useState(false);
+  const [length,setLength] = useState("");
+  
   const thinkingButtonClicked = () => {
     setThinking(true);
     setTimeout(() => {
@@ -51,8 +54,12 @@ function Content() {
               <Image height={30} src={StarImage} />
             </Button>
           </div>
-          <Textarea value={topics} />
-          <Switch color="default">SEO Optimised?</Switch>
+          <Textarea onChange={e => {
+            setTopics(e.target.value);
+          }} value={topics} />
+          <Switch onChange={e => {
+            setSeo(!seo);
+          }} color="default" >SEO Optimised?</Switch>
           <div className="flex items-center justify-between">
             <div>
               <p className="my-3">Tone</p>
@@ -62,23 +69,34 @@ function Content() {
 
                     variant="bordered"
                     className="max-w-lg w-full"
-                  >Professional</Button>
+                  >{option}</Button>
                 </DropdownTrigger>
                 <DropdownMenu
                   aria-label="Static Actions"
                   className="w-full max-w-lg"
                 >
-                  <DropdownItem>Professional</DropdownItem>
+                  <DropdownItem onPress={() => {
+                    setOption("Professional")
+                  }}>Professional</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
             <div>
             <p className="my-3">Content Character Length</p>
-            <Input type="number"/>
+            <Input type="number" onChange={e => {
+              setLength(e.target.value);
+            }}/>
 
             </div>
           </div>
-          <NextButton destRoute={"/Review"}/>
+          <NextButton destRoute={"/Review"} data={
+            {
+              seo:seo,
+              contentLength :length,
+              topics : topics,
+              tone : option
+            }
+          }/>
         </CardBody>
       </Card>
     </div>
