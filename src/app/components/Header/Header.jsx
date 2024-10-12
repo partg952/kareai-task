@@ -29,7 +29,7 @@ function Header() {
         <b>AI Social Media</b>
       </h1>
       <div>
-        {window.innerWidth >= 1050 ? (
+        {window!=undefined && window.innerWidth >= 1050 ? (
           <div className={styles.progressTopics}>
             {topics.map((topic, i) => (
               <div
