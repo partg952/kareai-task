@@ -16,7 +16,6 @@ const topics = [
 function Header() {
   const { progress, setProgress } = useContext(Context);
   const pathname = usePathname();
-  console.log(window.innerWidth);
   const focusedTopic = {
     translate: "0 -10px",
   };
