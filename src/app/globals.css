@@ -15,6 +15,27 @@ div.childrenWrapper {
   overflow-y:scroll ;
   margin: 10px;
   padding: 10px;
+&::-webkit-scrollbar {
+    width: 12px;
+    
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(128, 0, 128, 0.416);
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 0, 128, 0.616);
+  }
 }
 &::-webkit-scrollbar {
     width: 12px;

@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { NextUIProvider } from "@nextui-org/react";
+import headerStyles from './components/Header/header.module.scss';
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { context } from "./contextProvider";
@@ -37,7 +38,10 @@ export default function RootLayout({ children }) {
       >
         <NextUIProvider>
           <ContextProvider>
-            {!pathname.includes("/ScheduledPosts") &&  <Header />}
+            {!pathname.includes("/ScheduledPosts") ? <Header /> : 
+            <div className={headerStyles.headerWrapper}>
+                <p className="text-3xl text-center my-5"><b>Manage Scheduled Posts</b></p>
+              </div>}
             <Sidebar />
             <div className={"childrenWrapper"}>{children}</div>
           </ContextProvider>

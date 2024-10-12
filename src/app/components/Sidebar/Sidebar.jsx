@@ -48,6 +48,7 @@ function Sidebar() {
           <div
             onClick={() => {
               item == "ai social media" && router.push("/Platform");
+              setPosition("-300px")
             }}
             key={i}
             className={styles.sidebarOptions}

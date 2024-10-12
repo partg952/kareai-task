@@ -11,7 +11,7 @@ function Platform() {
   const value = useContext(Context);
   const [checkBoxData,setData] = useState([]);
   return (
-    <div className = {'flex justify-center items-center'}>
+    <div className = {'flex justify-center items-center w-full bg-red'}>
       <Card className="w-full max-w-lg p-4">
         <CardBody>
           <div className = "flex justify-between items-center">
