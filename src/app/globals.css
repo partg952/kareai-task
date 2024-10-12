@@ -3,12 +3,37 @@
 @tailwind utilities;
 body {
   font-family: var(--font-geist-mono);
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
 }
 div.childrenWrapper {
   height: 80vh;
-  width: 80vw;
+  width: 100vw;
   float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y:scroll ;
   margin: 10px;
   padding: 10px;
 }
+&::-webkit-scrollbar {
+    width: 12px;
+    
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(128, 0, 128, 0.416);
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 0, 128, 0.616);
+  }
