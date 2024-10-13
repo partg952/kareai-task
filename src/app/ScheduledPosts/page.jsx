@@ -26,7 +26,7 @@ function ScheduledPosts() {
 
 
   return (
-    <div className="*:my-7 w-full flex items-center justify-center flex-col">
+    <div className="*:my-7 w-full flex items-center top-0 flex-col">
      
       <p>
         Current System Time :{" "}

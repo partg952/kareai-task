@@ -37,7 +37,7 @@ function DropdownComp({title,modalTitle,modalOptions,dropdownOptions,setData,dat
               <ModalBody>
                 {
                   modalOptions.map((item,i) => (
-                    <Button key={i}>{item}</Button>
+                    <Button variant="light" key={i}>{item}</Button>
                   ))
                 }
               </ModalBody>

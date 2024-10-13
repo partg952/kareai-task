@@ -35,7 +35,7 @@ function Sidebar() {
     <div style={{
       overflowY:"scroll"
     }}>
-      <Button className="absolute m-8" isIconOnly variant="light" onPress={() => {
+      <Button className="absolute m-5" isIconOnly variant="light" onPress={() => {
         setPosition("0")
       }}><MenuIcon/></Button>
       <div ref={sideBarRef} id='sidebar-wrapper' style={{
