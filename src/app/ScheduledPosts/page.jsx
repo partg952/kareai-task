@@ -26,7 +26,7 @@ function ScheduledPosts() {
 
 
   return (
-    <div className="*:my-7 w-full">
+    <div className="*:my-7 w-full flex items-center justify-center flex-col">
      
       <p>
         Current System Time :{" "}
@@ -37,7 +37,7 @@ function ScheduledPosts() {
           hour12: true,
         })}
       </p>
-      <Table aria-label="Example static collection table">
+      <Table className="max-w-xl md:max-w-3xl" aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Platform</TableColumn>
           <TableColumn>Product/Services</TableColumn>

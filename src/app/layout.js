@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
           <ContextProvider>
             {!pathname.includes("/ScheduledPosts") ? <Header /> : 
             <div className={headerStyles.headerWrapper}>
-                <p className="text-3xl text-center my-5"><b>Manage Scheduled Posts</b></p>
+                <p className="text-xl text-center my-5"><b>Manage Scheduled Posts</b></p>
               </div>}
             <Sidebar />
             <div className={"childrenWrapper"}>{children}</div>
