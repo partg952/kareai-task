@@ -4,6 +4,7 @@ import styles from "./header.module.scss";
 import { Progress } from "@nextui-org/react";
 import { useContext,useState,useEffect } from "react";
 import { usePathname } from "next/navigation";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Context } from "../../contextProvider";
 const topics = [
   "Platform",
@@ -40,10 +41,16 @@ function Header() {
                 className={styles.topicItem}
                 style={{
                   translate: pathname.replace("/", "") == topic && "0 -20px",
+                  border : pathname.replace("/","") == topic && "2px solid purple-400",
+                  borderRadius : "20px"
                 }}
               >
                 <p>{i + 1}</p>
                 <h4>{topic}</h4>
+                <ArrowForwardIosIcon style = {{
+                  height:"10px",
+                  width:"10px"
+                }}/>
                 <hr
                   style={{
                     height: 0.5,

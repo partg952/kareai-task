@@ -31,10 +31,10 @@ function Campaign() {
   ];
   return (
     <div className="flex items-center justify-center">
-      <Card className="w-full max-w-lg p-2 flex flex-col justify-center items-center">
+      <Card className="w-full max-w-md md:max-w-lg p-2 flex flex-col justify-center items-center">
         <CardBody>
           <div className="flex items-center justify-between">
-            <h3 className="text-3xl"><b>Create a Campaign</b></h3>
+            <h3 className="text-xl md:text-3xl  "><b>Create a Campaign</b></h3>
             <p className="bg-purple-400 rounded-3xl p-3 text-white">
               Campaigns
             </p>

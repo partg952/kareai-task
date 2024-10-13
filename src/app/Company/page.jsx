@@ -19,10 +19,10 @@ function Company() {
   const router = useRouter();
   return (
     <div  className="flex justify-center items-center">
-      <Card className="w-full max-w-lg p-2 flex flex-col justify-center items-center">
+      <Card className="w-full max-w-md md:max-w-lg p-2 flex flex-col justify-center items-center">
         <CardBody>
           <div className="flex justify-between items-center">
-            <h3 className="text-3xl"><b>Company Info</b></h3>
+            <h3 className="text-xl md:text-3xl"><b>Company Info</b></h3>
             <p className="bg-purple-400 p-3 rounded-3xl text-white ">
               BrandCenter
             </p>
