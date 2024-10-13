@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./header.module.scss";
 import { Progress } from "@nextui-org/react";
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Context } from "../../contextProvider";
 const topics = [
@@ -16,19 +16,23 @@ const topics = [
 function Header() {
   const { progress, setProgress } = useContext(Context);
   const pathname = usePathname();
+  const [width,setWidth] = useState();
   const focusedTopic = {
     translate: "0 -10px",
   };
   setProgress(
     (100 / topics.length) * (topics.indexOf(pathname.replace("/", "")) + 1)
   );
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  },[])
   return (
     <div className={styles.headerWrapper}>
       <h1 className="text-3xl text-center my-5">
         <b>AI Social Media</b>
       </h1>
       <div>
-        {window!=undefined && window.innerWidth >= 1050 ? (
+        {width >= 1050 ? (
           <div className={styles.progressTopics}>
             {topics.map((topic, i) => (
               <div
