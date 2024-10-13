@@ -28,7 +28,7 @@ function Publish() {
   const [option, setOption] = useState("Every day");
   return (
     <div className="flex items-center justify-center">
-      <Card className="w-full max-w-md md:max-w-lg p-2 flex flex-col justify-center items-center m-3">
+      <Card className="w-full max-w-sm md:max-w-lg p-2 flex flex-col justify-center items-center my-8">
         <CardBody>
           <h3 className="my-3 text-xl md:text-3xl"><b>When to Publish</b></h3>
           <p>

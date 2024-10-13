@@ -36,7 +36,7 @@ function Content() {
 
   return (
     <div className="flex items-center justify-center">
-      <Card className=" w-full max-w-md md:max-w-lg p-2 flex flex-col justify-center items-center">
+      <Card className=" w-full max-w-sm md:max-w-lg p-2 flex flex-col justify-center items-center">
         <CardBody className="*:my-3">
           <h1 className="text-xl md:text-3xl"><b>Generate Content</b></h1>
           <p>

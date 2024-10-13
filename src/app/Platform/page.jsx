@@ -12,7 +12,7 @@ function Platform() {
   const [checkBoxData,setData] = useState([]);
   return (
     <div className = {'w-screen float-right flex h-full  justify-center items-center w-full '}>
-      <Card className=" max-w-md p-4 md:max-w-lg">
+      <Card className=" max-w-sm p-4 md:max-w-lg">
         <CardBody>
           <div className = "flex justify-between items-center">
             <h2 className='text-xl md:text-3xl'><b>Select Platform</b></h2>
