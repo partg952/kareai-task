@@ -1,22 +1,24 @@
 "use client";
 import React from "react";
 import styles from "./header.module.scss";
+import { useRouter } from "next/navigation";
 import { Progress } from "@nextui-org/react";
 import { useContext,useState,useEffect } from "react";
 import { usePathname } from "next/navigation";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Context } from "../../contextProvider";
 const topics = [
-  "Platform",
   "Company",
   "Campaign",
   "Content",
   "Review",
+  "Platform",
   "Publish",
 ];
 function Header() {
   const { progress, setProgress } = useContext(Context);
   const pathname = usePathname();
+  const router = useRouter();
   const [width,setWidth] = useState();
   const focusedTopic = {
     translate: "0 -10px",
@@ -37,6 +39,9 @@ function Header() {
           <div className={styles.progressTopics}>
             {topics.map((topic, i) => (
               <div
+                onClick={() => {
+                  router.push(`/${topic}`)
+                }}
                 key={i}
                 className={styles.topicItem}
                 style={{

@@ -34,7 +34,7 @@ function Review() {
                 reviewContent:value,
                 sendEmail:on
               }});
-              router.push("/Publish")
+              router.push("/Platform")
               
           } }>Next</Button>
         </CardBody>

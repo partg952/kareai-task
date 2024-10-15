@@ -25,7 +25,7 @@ function Platform() {
             <Checkbox value='x'>X</Checkbox>
             <Checkbox value='linkedin'>Linkedin</Checkbox>
           </CheckboxGroup>
-          <NextButton destRoute={'/Company'} data={{platform:checkBoxData}}/> 
+          <NextButton destRoute={'/Publish'} data={{platform:checkBoxData}}/> 
         </CardBody>
       </Card>
     </div>
