@@ -13,25 +13,33 @@ import {
   Input
 } from "@nextui-org/react";
 import { useState,useRef} from "react";
-
+import axios from 'axios';
 import Image from "next/image";
 import StarImage from "../assets/star.png";
 import NextButton from "../components/NextButton";
+import { useContext } from "react";
+import { Context } from "../contextProvider";
 function Content() {
   const [thinking, setThinking] = useState(false);
   const [topics, setTopics] = useState("");
   const [option, setOption] = useState("Professional");
-  const [seo,setSeo] = useState(false);
+  const value = useContext(Context);
+  const [seo,setSeo] = useState(true);
   const [length,setLength] = useState("");
   
   const thinkingButtonClicked = () => {
     setThinking(true);
-    setTimeout(() => {
-      setTopics(
-        "Lead nurturing statergies content marketing automation account-based marketting webinar and virtual events email marketting optimization special media engagement for b2b seo for saas platform"
-      );
+    axios.post(
+      "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/topics",{
+        company : value.finalData.company,
+        product : value.finalData.product,
+        campaign : value.finalData.objective,
+        audience : value.finalData.targetAudience 
+      }
+    ).then(res => {
+      setTopics(res.data);
       setThinking(false);
-    }, 2000);
+    });
   };
 
   return (
@@ -59,7 +67,7 @@ function Content() {
           }} value={topics} />
           <Switch onChange={e => {
             setSeo(!seo);
-          }} color="default" >SEO Optimised?</Switch>
+          }} color="default" defaultChecked = {true} >SEO Optimised?</Switch>
           <div className="flex items-center justify-between">
             <div>
               <p className="my-3">Tone</p>
@@ -83,7 +91,7 @@ function Content() {
             </div>
             <div>
             <p className="my-3">Content Character Length</p>
-            <Input type="number" onChange={e => {
+            <Input defaultValue={6000} type="number" onChange={e => {
               setLength(e.target.value);
             }}/>
 

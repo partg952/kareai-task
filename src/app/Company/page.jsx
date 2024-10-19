@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Card,
   CardBody,
@@ -11,20 +11,64 @@ import {
   ModalFooter,
   useDisclosure,
   Input,
+  Tabs,
+  Tab,
 } from "@nextui-org/react";
 import DropdownComp from "../components/DropdownComp";
-import CloseIcon from "@mui/icons-material/Close";
+import SelectOptions from "../components/SelectOptions";
 import NextButton from "../components/NextButton";
+import axios from 'axios';
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import { Reem_Kufi } from "next/font/google";
 function Company() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [company, setCompany] = useState();
-  const [product, setProduct] = useState();
-  const [items, selectedItems] = useState([]);
-  console.log(items);
+  const [company, setCompany] = useState("Select a Company");
+  const [product, setProduct] = useState("Select a Product");
+  const [companies, setCompanies] = useState([]);
+  const filePicker = useRef();
+  const [products, setProducts] = useState([]);
+  console.log(products);
+  const [urls, setUrls] = useState([]);
+  const [file, setFile] = useState();
+  console.log(file);
+  const [fileName,setFileName] = useState("");
   const obj = {
     company: company,
     product: product,
+    file : file,
+    url:urls.length >= 1  ? urls[0] : undefined
   };
+
+  function convertToBase64(file) {
+    const fileReader = new FileReader();
+    var base64;
+    fileReader.onloadend = (e) => {
+      base64 = e.target.result;
+      setFile(base64.replace("data:application/pdf;base64,",""));
+    }
+    fileReader.readAsDataURL(file);
+  }
+
+  function sendCreateVectorRequest() {
+    return new Promise((res,rej) => {
+      axios.post(
+        "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/create_vector",
+        {
+          base64_string: obj.file,
+          index_name: obj.company,
+          user_email: "koustav@kareai.io",
+        }
+      ).then(response => {
+        console.log(response);
+        res("The request is sucessfull!");
+      }).catch(err => {
+        console.log(err);
+        rej("An Error Occured : ",err);
+      });
+    })
+  }
+
+
 
   return (
     <div className="flex justify-center items-center">
@@ -35,62 +79,82 @@ function Company() {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex items-center justify-center flex-col gap-1">
-                    Modal Title
+                    Select Products and Companies
                   </ModalHeader>
                   <ModalBody>
-                    <Input
-                      type="text"
-                      variant="bordered"
-                      placeholder="Enter the company name..."
-                      color="secondary"
-                      onKeyDown={(e) => {
-                        if (
-                          e.key === "Enter" &&
-                          e.target.value.length != 0 &&
-                          !items.includes(e.target.value)
-                        ) {
-                          console.log(e);
-                          selectedItems([...items, e.target.value]);
-                          e.target.value = "";
-                        }
-                      }}
-                    />
-                    <div className="flex flex-wrap bg-slate-300 p-3 rounded-2xl max-h-40 overflow-y-scroll">
-                      {items.map((item, i) => (
-                        <Card
-                          key={i}
-                          className="flex items-center justify-center  border-2 border-solid border-purple-400 rounded-xl m-0.5 h-12 overflow-hidden "
-                        >
-                          <CardBody className="flex items-center justify-center flex-row overflow-hidden">
-                            <p className="text-sm">{item}</p>
-                            <Button
-                              onPress={() => {
-                                const temp = items.filter((x) => x != item);
-                                console.log(temp);
-                                selectedItems(temp);
-                              }}
-                              isIconOnly
-                              variant="outlined"
-                              className="w-1"
+                    <Tabs color="secondary" className="justify-center">
+                      <Tab title="Company and Product">
+                        <SelectOptions
+                          items={companies}
+                          selectedItems={setCompanies}
+                          placeholder="Enter the company name"
+                          maxOptions={1}
+                        />
+                        <SelectOptions
+                          items={products}
+                          selectedItems={setProducts}
+                          placeholder="Enter the product names"
+                        />
+                      </Tab>
+                      <Tab title="Past Blogs and URL's">
+                        <SelectOptions
+                          items={urls}
+                          selectedItems={setUrls}
+                          placeholder={"Enter the URls"}
+                          maxOptions={file != undefined ? 0 : 1}
+                        />
+                        <h1 className="text-center text-lg">Or</h1>
+                        <div className="my-3">
+                          <input
+                            type="file"
+                            ref={filePicker}
+                            disabled={urls.length >= 1}
+                            accept="application/pdf"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setFileName(e.target.files[0].name);
+                              convertToBase64(e.target.files[0])
+                            }}
+                          />
+                          <div
+                            className="h-40 bg-slate-300 rounded-xl flex items-center justify-center"
+                            onClick={() => {
+                              filePicker.current.click();
+                            }}
+                          >
+                            <div
+                              className={`flex flex-col items-center justify-center ${
+                                urls.length >= 1 && "text-slate-500"
+                              }`}
                             >
-                              <CloseIcon
-                                style={{
-                                  height: "20px",
-                                  width: "20px",
-                                }}
-                              />
-                            </Button>
-                          </CardBody>
-                        </Card>
-                      ))}
-                    </div>
+                              {file == undefined ? (
+                                <>
+                                  <UploadFileIcon
+                                    style={{
+                                      height: "100px",
+                                      width: "100px",
+                                      marginLeft: "auto",
+                                      marginRight: "auto",
+                                    }}
+                                  />
+                                  <h2>
+                                    <b>Click to upload a file.</b>
+                                  </h2>{" "}
+                                </>
+                              ) : (
+                                <>
+                                  <h1 className="text-center">{fileName}</h1>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </Tab>
+                    </Tabs>
                   </ModalBody>
                   <ModalFooter>
-                    <Button color="secondary" variant="light" onPress={onClose}>
+                    <Button color="secondary" variant="bordered" onPress={onClose}>
                       Done
-                    </Button>
-                    <Button color="danger" variant="light" onPress={onClose}>
-                      Close
                     </Button>
                   </ModalFooter>
                 </>
@@ -117,18 +181,20 @@ function Company() {
             modalTitle={"Select a Company"}
             setData={setCompany}
             data={company}
-            dropdownOptions={["MagicAI", "Rockstar Games"]}
-            modalOptions={["MagicAI", "Rockstar Games"]}
+            selectableOptions={companies}
+            isAddable={false}
+
           />
           <DropdownComp
             title={"Select a Product"}
             modalTitle={"Select a Product"}
             setData={setProduct}
             data={product}
-            dropdownOptions={["Gta 6"]}
-            modalOptions={["Gta 6"]}
+            selectableOptions = {products}
+            isAddable={true}
+            
           />
-          <NextButton destRoute={"/Campaign"} data={obj} />
+          <NextButton destRoute={"/Campaign"} data={obj} additionalFunction={sendCreateVectorRequest}/>
         </CardBody>
       </Card>
     </div>

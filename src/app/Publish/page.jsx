@@ -15,6 +15,7 @@ import {
 import NextButton from "../components/NextButton";
 import { useState } from "react";
 import { ContactSupportOutlined } from "@mui/icons-material";
+import axios from 'axios';
 function Publish() {
   const [repeat,setRepeat] = useState(false);
   const [date,setDate] = useState(new Date().getDate());
@@ -36,7 +37,6 @@ function Publish() {
             timezone in the profile settings
           </p>
           <div className="flex items-center justify-between my-5">
-            <Switch onChange={() => setRepeat(!repeat)}>Repeat</Switch>
             <Dropdown>
               <DropdownTrigger>
                 <Button variant="outlined">{option}</Button>
@@ -76,7 +76,11 @@ function Publish() {
             duration : option,
             date : date,
             time:time
-          }}/>
+          }}
+          additionalFunction={() => {
+            
+          }}
+          />
         </CardBody>
       </Card>
     </div>
