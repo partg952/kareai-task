@@ -14,18 +14,28 @@ import {
 } from "@nextui-org/react";
 import NextButton from "../components/NextButton";
 import { useState } from "react";
+import { useEffect } from "react";
 import { ContactSupportOutlined } from "@mui/icons-material";
+import { useContext } from "react";
+import { Context } from "../contextProvider";
 import axios from 'axios';
 function Publish() {
   const [repeat,setRepeat] = useState(false);
   const [date,setDate] = useState(new Date().getDate());
   const [time,setTime] = useState();
+  const value = useContext(Context);
   const getTime = () =>{
     return new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric',second:'numeric', hour12: true });
     
   }
 
-
+  useEffect(() => {
+    axios.post("https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/linkedin_post",{
+      blog : value.finalData.blog 
+    }).then(res => {
+      console.log(res.data);
+    })
+  },[])
   const [option, setOption] = useState("Every day");
   return (
     <div className="flex items-center justify-center">

@@ -16,6 +16,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import SelectOptions from "./SelectOptions";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import StartImage from "../assets/star.png";
 import { useState, useEffect } from "react";
@@ -30,8 +31,9 @@ function DropdownComp({
   additionalThinkingFunction,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [isThinking,setThinking] = useState(false);
+  const [isThinking, setThinking] = useState(false);
   const [option, selectedOption] = useState(data);
+  const pathname = usePathname();
   const [options, addOptions] = useState([...selectableOptions]);
   useEffect(() => {
     addOptions([...selectableOptions]);
@@ -46,7 +48,7 @@ function DropdownComp({
       <div className="flex justify-between items-center">
         <p>{title}</p>
         {isAddable && (
-          <Button variant="light" className="my-3" onPress={onOpen}>
+          <Button variant="light" className="" onPress={onOpen}>
             Add new+
           </Button>
         )}
@@ -58,8 +60,8 @@ function DropdownComp({
             onPress={() => {
               setThinking(true);
               additionalThinkingFunction().finally(() => {
-                 setThinking(false);
-              })
+                setThinking(false);
+              });
             }}
           >
             <Image height={30} src={StartImage} />
@@ -96,9 +98,21 @@ function DropdownComp({
       </Modal>
       <Dropdown>
         <DropdownTrigger>
-          <Button variant="bordered" className="max-w-lg w-full">
-            <p>{option}</p>
-          </Button>
+          {!(pathname == "/Campaign") ? (
+            <Button
+              variant="bordered"
+              className="max-w-lg w-full"
+            >
+              {option}
+            </Button>
+          ) : (
+            <h1
+              variant="bordered"
+              className="max-w-lg w-full cursor-pointer border-2 border-solid border-slate-300 p-3 rounded-xl my-3"
+            >
+              {option}
+            </h1>
+          )}
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions" className="w-full max-w-lg">
           {options != undefined &&
