@@ -9,7 +9,7 @@ import Analytics from "../assets/analytics.svg";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Demo from "../assets/demo.png";
 import Image from "next/image";
-export default function Twitter({text,image}) {
+export default function Twitter({ text, image }) {
   const iconsStyle = {
     height: "20px",
     width: "20px",
@@ -32,10 +32,15 @@ export default function Twitter({text,image}) {
           </div>
         </CardHeader>
         <CardBody>
-          <p className="text-xs max-h-20 min-h-20 overflow-y-scroll">
-            {text}
-          </p>
-          <Image src={Demo} className="w-full rounded-xl my-2" />
+          <p className="text-xs max-h-20 min-h-20 overflow-y-auto">{text}</p>
+          <div className="max-h-72 overflow-y-auto">
+            <Image
+              src={image}
+              height={200}
+              width={200}
+              className="w-full rounded-xl my-2"
+            />
+          </div>
         </CardBody>
         <CardFooter>
           <div className="flex w-full items-center justify-between">
@@ -43,7 +48,7 @@ export default function Twitter({text,image}) {
             <Retweet style={iconsStyle} />
             <Like style={iconsStyle} />
             <Analytics style={iconsStyle} />
-            <div className="flex *:m-1"> 
+            <div className="flex *:m-1">
               <Bookmark style={iconsStyle} />
               <Share style={iconsStyle} />
             </div>

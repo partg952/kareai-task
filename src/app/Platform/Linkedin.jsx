@@ -9,10 +9,10 @@ import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import CommentRoundedIcon from "@mui/icons-material/Comment";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import Demo from "../assets/demo.png";
-function Linkedin({image,text}) {
+function Linkedin({ image, text }) {
   const value = useContext(Context);
   return (
-    <div className="max-w-md h-fit ">
+    <div className="max-w-md ">
       <Card className="overflow-hidden">
         <CardHeader>
           <div className="flex  justify-between *:m-1 my-2">
@@ -28,21 +28,22 @@ function Linkedin({image,text}) {
               </h1>
               <p className="text-xs">
                 DescriptionLorem ipsum dolor sit amet, consectetur adipiscing
-                elit.
               </p>
             </div>
           </div>
         </CardHeader>
         <CardBody>
-          <div className="h-full max-h-24 text-xs text-ellipsis overflow-y-scroll">
-            <p className="h-full overflow-hidden min-h-24">{text}</p>
+          <div className="h-full max-h-24 text-xs text-ellipsis overflow-y-auto">
+            <p className="h-full overflow-hidden">{text}</p>
           </div>
-          <Image
-            width={300}
-            height={200}
-            className="w-full max-h-24 my-1"
-            src={Demo}
-          />
+          <div className="max-h-56 overflow-y-auto">
+            <Image
+              width={200}
+              height={200}
+              className="w-full my-1"
+              src={image}
+            />
+          </div>
         </CardBody>
         <CardFooter>
           <div className="flex items-center justify-between w-full * : flex">
