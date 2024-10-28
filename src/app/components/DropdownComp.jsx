@@ -45,10 +45,11 @@ function DropdownComp({
   }, [data]);
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         <p>{title}</p>
         {isAddable && (
-          <Button variant="light" className="" onPress={onOpen}>
+          <Button variant="light" className="size-0.5 text-xs" onPress={onOpen}>
+
             Add new+
           </Button>
         )}
@@ -114,7 +115,7 @@ function DropdownComp({
             </h1>
           )}
         </DropdownTrigger>
-        <DropdownMenu aria-label="Static Actions" className="w-full max-w-lg">
+        <DropdownMenu aria-label="Static Actions" className="w-full max-w-lg text-sm">
           {options != undefined &&
             options.map((item, i) => (
               <DropdownItem
@@ -123,8 +124,9 @@ function DropdownComp({
                   selectedOption(item);
                   setData(item);
                 }}
+                className="text-sm"
               >
-                {item}
+                <p className="text-2xs">{item}</p>
               </DropdownItem>
             ))}
         </DropdownMenu>

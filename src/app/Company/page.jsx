@@ -17,7 +17,7 @@ import {
 import DropdownComp from "../components/DropdownComp";
 import SelectOptions from "../components/SelectOptions";
 import NextButton from "../components/NextButton";
-import axios from 'axios';
+import axios from "axios";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { Reem_Kufi } from "next/font/google";
 function Company() {
@@ -31,12 +31,12 @@ function Company() {
   const [urls, setUrls] = useState([]);
   const [file, setFile] = useState();
   console.log(file);
-  const [fileName,setFileName] = useState("");
+  const [fileName, setFileName] = useState("");
   const obj = {
     company: company,
     product: product,
-    file : file,
-    url:urls.length >= 1  ? urls[0] : undefined
+    file: file,
+    url: urls.length >= 1 ? urls[0] : undefined,
   };
 
   function convertToBase64(file) {
@@ -44,35 +44,57 @@ function Company() {
     var base64;
     fileReader.onloadend = (e) => {
       base64 = e.target.result;
-      setFile(base64.replace("data:application/pdf;base64,",""));
-    }
+      setFile(base64.replace("data:application/pdf;base64,", ""));
+    };
     fileReader.readAsDataURL(file);
   }
 
   function sendCreateVectorRequest() {
-    return new Promise((res,rej) => {
-      axios.post(
-        "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/create_vector",
-        {
-          base64_string: obj.file,
-          index_name: obj.company,
-          user_email: "koustav@kareai.io",
-        }
-      ).then(response => {
-        console.log(response);
-        res("The request is sucessfull!");
-      }).catch(err => {
-        console.log(err);
-        rej("An Error Occured : ",err);
-      });
-    })
+    return new Promise((res, rej) => {
+      axios
+        .post(
+          "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/create_vector",
+          {
+            base64_string: obj.file,
+            index_name: obj.company,
+            user_email: "koustav@kareai.io",
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          res("The request is sucessfull!");
+        })
+        .catch((err) => {
+          console.log(err);
+          rej("An Error Occured : ", err);
+        });
+    });
+  }
+  function sendCreateVectorUrlRequest() {
+    return new Promise((res, rej) => {
+      axios
+        .post(
+          "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/create_vector_url",
+          {
+            url: urls[0],
+            index_name: obj.company,
+            user_email: "koustav@kareai.io",
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          res("The request is sucessfull!");
+        })
+        .catch((err) => {
+          console.log(err);
+          rej("An Error Occured : ", err);
+        });
+    });
   }
 
-
-
   return (
-    <div className="flex justify-center items-center">
-      <Card className="w-full max-w-sm md:max-w-lg p-2 flex flex-col justify-center items-center">
+    <div className="flex justify-center items-center *:text-xs">
+      <Card className="w-full max-w-sm md:max-w-md p-2 flex flex-col justify-center items-center * : text-sm">
         <CardBody>
           <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
@@ -113,7 +135,7 @@ function Company() {
                             style={{ display: "none" }}
                             onChange={(e) => {
                               setFileName(e.target.files[0].name);
-                              convertToBase64(e.target.files[0])
+                              convertToBase64(e.target.files[0]);
                             }}
                           />
                           <div
@@ -131,13 +153,13 @@ function Company() {
                                 <>
                                   <UploadFileIcon
                                     style={{
-                                      height: "100px",
-                                      width: "100px",
+                                      height: "80px",
+                                      width: "80px",
                                       marginLeft: "auto",
                                       marginRight: "auto",
                                     }}
                                   />
-                                  <h2>
+                                  <h2 className="text-sm">
                                     <b>Click to upload a file.</b>
                                   </h2>{" "}
                                 </>
@@ -153,7 +175,11 @@ function Company() {
                     </Tabs>
                   </ModalBody>
                   <ModalFooter>
-                    <Button color="secondary" variant="bordered" onPress={onClose}>
+                    <Button
+                      color="secondary"
+                      variant="bordered"
+                      onPress={onClose}
+                    >
                       Done
                     </Button>
                   </ModalFooter>
@@ -162,7 +188,7 @@ function Company() {
             </ModalContent>
           </Modal>
           <div className="flex justify-between items-center">
-            <h3 className="text-xl md:text-3xl">
+            <h3 className="text-xl md:text-2xl">
               <b>Company Info</b>
             </h3>
             <Button
@@ -183,18 +209,20 @@ function Company() {
             data={company}
             selectableOptions={companies}
             isAddable={false}
-
           />
           <DropdownComp
             title={"Select a Product"}
             modalTitle={"Select a Product"}
             setData={setProduct}
             data={product}
-            selectableOptions = {products}
+            selectableOptions={products}
             isAddable={true}
-            
           />
-          <NextButton destRoute={"/Campaign"} data={obj} additionalFunction={sendCreateVectorRequest}/>
+          <NextButton
+            destRoute={"/Campaign"}
+            data={obj}
+            additionalFunction={!(urls.length >= 1)  ? sendCreateVectorRequest : sendCreateVectorUrlRequest}
+          />
         </CardBody>
       </Card>
     </div>

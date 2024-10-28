@@ -24,14 +24,14 @@ function Header() {
     translate: "0 -10px",
   };
   setProgress(
-    (100 / topics.length) * (topics.indexOf(pathname.replace("/", "")) + 1)
+    pathname != '/Platform/Selection' && pathname!='/Platform/Final' ? (100 / topics.length) * (topics.indexOf(pathname.replace("/", "")) + 1) : 5*16.66
   );
   useEffect(() => {
     setWidth(window.innerWidth);
   },[])
   return (
     <div className={styles.headerWrapper}>
-      <h1 className="text-3xl text-center my-5">
+      <h1 className="text-2xl text-center my-6">
         <b>AI Social Media</b>
       </h1>
       <div>
@@ -91,7 +91,7 @@ function Header() {
         aria-label="Loading..."
         value={progress}
         color="success"
-        size="md"
+        size="sm"
       />
     </div>
   );

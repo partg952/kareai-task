@@ -49,18 +49,18 @@ function Campaign() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <Card className="w-full max-w-sm md:max-w-lg p-2 flex flex-col justify-center items-center">
+    <div className="flex items-center justify-center * : text-xs">
+      <Card className="w-full max-w-sm md:max-w-lg p-2 max-h-100 flex flex-col justify-center items-center">
         <CardBody>
           <div className="flex items-center justify-between">
-            <h3 className="text-xl md:text-3xl  ">
+            <h3 className="text-xl md:text-2xl">
               <b>Create a Campaign</b>
             </h3>
             <p className="bg-purple-400 rounded-3xl p-3 text-white">
               Campaigns
             </p>
           </div>
-          <p className="my-5">
+          <p className="my-1">
             Explain your audience aligning with your content and specific goals
             such as brand awareness,lead generation,education, etc.
           </p>
@@ -95,12 +95,13 @@ function Campaign() {
             }}
           />
           <div className="flex justify-between items-center">
-            <p className="my-5">
+            <p className="my-1">
               What is your target audience for this content?
             </p>
             <Button
               isIconOnly
               variant="light"
+              className="my-1"
               isLoading={thinking}
               onPress={thinkButtonClicked}
             >
@@ -108,8 +109,10 @@ function Campaign() {
             </Button>
           </div>
           <Textarea
+            maxRows={4}
             ref={textRef}
             value={audience}
+            className="text-sm max-h-min"
             onChange={(e) => {
               setAudience(e.target.value);
             }}

@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'linkedin-blue' : "#0078c7"
       },
     },
   },

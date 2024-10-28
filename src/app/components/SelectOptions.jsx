@@ -28,7 +28,7 @@ function SelectOptions({items,selectedItems,placeholder,maxOptions}) {
           }
         }}
       />
-      <div className="flex flex-wrap bg-slate-300 p-3 rounded-2xl max-h-40 min-h-40 overflow-y-scroll m-1 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-track]:bg-slate-300 [&::-webkit-scrollbar-thumb]:bg-gray-300   ">
+      <div className="flex flex-wrap bg-slate-300 p-3 rounded-2xl max-h-40 min-h-24  overflow-y-scroll m-1 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-track]:bg-slate-300 [&::-webkit-scrollbar-thumb]:bg-gray-300   ">
         {items.map((item, i) => (
           <Card
             key={i}

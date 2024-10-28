@@ -49,7 +49,7 @@ function Review() {
   return (
     <div className="flex items-center justify-center">
       <NextButton
-        destRoute={"/Platform"}
+        destRoute={"/Platform/Selection"}
         styles={"absolute top-1 right-48 w-24 h-14 text-md  "}
         data={{
           blog: blog,
@@ -115,7 +115,7 @@ function Review() {
           modelValue={blog}
           onChange={setBlog}
           style={{
-            height: "80vh",
+            height: "70vh",
             width: "100vw",
           }}
         />
