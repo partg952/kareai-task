@@ -57,12 +57,13 @@ export default function ImageActions({ setImage, feedback, blog }) {
           id="file-picker"
           style={{ display: "none" }}
         />
-        {actions.map((button,i ) => {
+        {actions.map((button) => {
           return (
             <Button
-              key = {i}
+              
               variant="bordered"
               color="second"
+              key = {button.buttonName}
               isIconOnly
               onPress={button.buttonFunction}
             >

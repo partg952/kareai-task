@@ -1,23 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Card,
-  CardBody,
-  Switch,
-  Dropdown,
-  DropdownItem,
-  DropdownTrigger,
-  DropdownMenu,
-  Button,
-  Calendar,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-  ModalContent,
-  ModalBody,
-  useDisclosure,
-  TimeInput,
-} from "@nextui-org/react";
+import {Card,CardBody,Switch,Dropdown,DropdownItem,DropdownTrigger,DropdownMenu,Button,Calendar,Modal,ModalHeader,ModalFooter,ModalContent,ModalBody,useDisclosure,TimeInput,} from "@nextui-org/react";
 import NextButton from "../components/NextButton";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -104,7 +87,7 @@ function Publish() {
               onPress={onOpen}
               
             >
-              {setDate ? date.toString() : "Add Date"}
+              {date!=undefined ? date.toString() : "Add Date"}
             </Button>
           </div>
           <p className="mx-auto my-5 text-sm">
