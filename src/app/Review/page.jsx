@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, CardBody, Textarea, Switch, Button } from "@nextui-org/react";
+import { Card, CardBody,Switch, Button } from "@nextui-org/react";
 import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Context } from "../contextProvider";
@@ -12,6 +12,7 @@ import {
   ModalHeader,
   useDisclosure,
   ModalFooter,
+  Textarea
 } from "@nextui-org/react";
 import { MdEditor } from "md-editor-rt";
 import "md-editor-rt/lib/style.css";

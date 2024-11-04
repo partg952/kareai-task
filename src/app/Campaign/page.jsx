@@ -1,33 +1,35 @@
 "use client";
 import React, { useEffect } from "react";
-import { Card, CardBody, Textarea, Button } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  Textarea,
+  Button,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import NextButton from "../components/NextButton";
 import StartImage from "../assets/star.png";
 import DropdownComp from "../components/DropdownComp";
 import { useContext } from "react";
+import Wand from '../assets/wand.svg';
 import { Context } from "../contextProvider";
 import axios from "axios";
 function Campaign() {
   const [thinking, setThinking] = useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [objective, setObjective] = useState("Select a Campaign");
-  const [audience, setAudience] = useState(
-    "Woman aged 25-40 \n Income level of $50,000-$100,000 per year Interest in sustainable fashion active on social media platforms small to medium sized bussiness decision makres in IT departments Ages"
-  );
+  const [audience, setAudience] = useState();
   console.log(objective);
   const value = useContext(Context);
-  const [options, setOptions] = useState([
-    "test",
-    "Sell magic ai generative ai platform",
-    "social media",
-    "sdfsdf",
-    "Demand gen for b2b saas",
-    "webtico",
-    "arttabot",
-    "communication powers",
-    "H",
-  ]);
+  const [options, setOptions] = useState([]);
   const textRef = useRef();
 
   const thinkButtonClicked = () => {
@@ -86,8 +88,9 @@ function Campaign() {
                   .then((res) => {
                     console.log(res.data);
                     setObjective(res.data.replace('"', ""));
-                    resolve("The axios request was success!!")
-                  }).catch(err => {
+                    resolve("The axios request was success!!");
+                  })
+                  .catch((err) => {
                     console.log(err);
                     reject(err);
                   });
@@ -105,22 +108,42 @@ function Campaign() {
               isLoading={thinking}
               onPress={thinkButtonClicked}
             >
-              <Image height={30} src={StartImage} />
+              <Wand style = {{
+                height : "20px",
+                width : "20px"
+              }}/>
             </Button>
           </div>
-          <Textarea
-            maxRows={4}
-            ref={textRef}
-            value={audience}
-            className="text-sm max-h-min"
-            onChange={(e) => {
-              setAudience(e.target.value);
-            }}
-          />
+          <p
+            onClick={onOpen}
+            className="min-h-12 cursor-pointer p-3 text-small bg-slate-200 rounded-xl max-h-16 overflow-auto"
+          >
+            {audience}
+          </p>
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">
+                    Edit The Target Audience
+                  </ModalHeader>
+                  <ModalBody>
+                   <Textarea maxRows={6} value={audience} onValueChange={setAudience}/>
+                  </ModalBody>
+                  <ModalFooter>
+                   
+                    <Button color="secondary" variant = 'bordered'  onPress={onClose}>
+                      Done
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
           <NextButton
             destRoute={"/Content"}
             data={{
-              targetAudience: textRef.current != undefined && audience,
+              targetAudience:audience,
               objective: objective,
             }}
           />

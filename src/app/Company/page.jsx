@@ -36,7 +36,7 @@ function Company() {
     company: company,
     product: product,
     file: file,
-    url: urls.length >= 1 ? urls[0] : undefined,
+    url: urls.length > 0 ? urls : undefined,
   };
 
   function convertToBase64(file) {
@@ -72,16 +72,17 @@ function Company() {
   }
   function sendCreateVectorUrlRequest() {
     return new Promise((res, rej) => {
-      axios
+      const allRequests = urls.map(url => axios
         .post(
           "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/create_vector_url",
           {
-            url: urls[0],
+            url: url,
             index_name: obj.company,
             user_email: "koustav@kareai.io",
           }
-        )
-        .then((response) => {
+        ));
+      
+        Promises.all(allRequests).then((response) => {
           console.log(response);
           res("The request is sucessfull!");
         })
@@ -123,7 +124,7 @@ function Company() {
                           items={urls}
                           selectedItems={setUrls}
                           placeholder={"Enter the URls"}
-                          maxOptions={file != undefined ? 0 : 1}
+                          maxOptions={file != undefined ? 0 : undefined}
                         />
                         <h1 className="text-center text-lg">Or</h1>
                         <div className="my-3">
@@ -146,7 +147,7 @@ function Company() {
                           >
                             <div
                               className={`flex flex-col items-center justify-center ${
-                                urls.length >= 1 && "text-slate-500"
+                                urls.length > 0 && "text-slate-500"
                               }`}
                             >
                               {file == undefined ? (
@@ -221,7 +222,7 @@ function Company() {
           <NextButton
             destRoute={"/Campaign"}
             data={obj}
-            additionalFunction={!(urls.length >= 1)  ? sendCreateVectorRequest : sendCreateVectorUrlRequest}
+            additionalFunction={!(urls.length > 0)  ? sendCreateVectorRequest : sendCreateVectorUrlRequest}
           />
         </CardBody>
       </Card>

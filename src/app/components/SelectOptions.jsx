@@ -1,33 +1,46 @@
 import React from "react";
-import {Input,Card,CardBody,Button} from '@nextui-org/react';
+import { Input, Card, CardBody, Button } from "@nextui-org/react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
-function SelectOptions({items,selectedItems,placeholder,maxOptions}) {
-  const [inputValue,setInputValue] = useState("");
+function SelectOptions({ items, selectedItems, placeholder, maxOptions }) {
+  const [inputValue, setInputValue] = useState("");
   return (
     <div className="my-4">
-      <Input
-        type="text"
-        variant="bordered"
-        value = {inputValue}
-        onChange={e => {
+      <div className="flex *:m-1">
+        <Input
+          type="text"
+          variant="bordered"
+          value={inputValue}
+          onChange={(e) => {
             setInputValue(e.target.value);
-        }}
-        placeholder={placeholder}
-        color="secondary"
-        disabled = {maxOptions!=undefined ? items.length >= maxOptions : false}
-        onKeyDown={(e) => {
-          if (
-            e.key === "Enter" &&
-            e.target.value.length != 0 &&
-            !items.includes(e.target.value)
-          ) {
-            console.log(e);
-            selectedItems([...items, e.target.value]);
-            setInputValue("");
+          }}
+          placeholder={placeholder}
+          color="secondary"
+          disabled={
+            maxOptions != undefined ? items.length >= maxOptions : false
           }
-        }}
-      />
+          onKeyDown={(e) => {
+            if (
+              e.key === "Enter" &&
+              e.target.value.length != 0 &&
+              !items.includes(e.target.value)
+            ) {
+              selectedItems([...items, e.target.value]);
+              setInputValue("");
+            }
+          }}
+        />
+        <Button color="secondary" variant="bordered" onPress={() => {
+          if (
+              
+              inputValue.length != 0 &&
+              !items.includes(inputValue)
+            ) {
+              selectedItems([...items, inputValue]);
+              setInputValue("");
+            }
+        }}>Add</Button>
+      </div>
       <div className="flex flex-wrap bg-slate-300 p-3 rounded-2xl max-h-40 min-h-24  overflow-y-scroll m-1 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-track]:bg-slate-300 [&::-webkit-scrollbar-thumb]:bg-gray-300   ">
         {items.map((item, i) => (
           <Card

@@ -17,6 +17,7 @@ import {
 } from "@nextui-org/react";
 import SelectOptions from "./SelectOptions";
 import { usePathname } from "next/navigation";
+import Wand from '../assets/wand.svg';
 import Image from "next/image";
 import StartImage from "../assets/star.png";
 import { useState, useEffect } from "react";
@@ -65,7 +66,10 @@ function DropdownComp({
               });
             }}
           >
-            <Image height={30} src={StartImage} />
+            <Wand style = {{
+              height:"20px",
+              width:"20px"
+            }}/>
           </Button>
         )}
       </div>

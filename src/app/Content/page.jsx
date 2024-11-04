@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Wand from '../assets/wand.svg';
 import {
   Button,
   Card,
@@ -11,6 +12,12 @@ import {
   DropdownItem,
   DropdownTrigger,
   Input,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure
 } from "@nextui-org/react";
 import { useState, useRef } from "react";
 import axios from "axios";
@@ -22,6 +29,7 @@ import { Context } from "../contextProvider";
 function Content() {
   const [thinking, setThinking] = useState(false);
   const [topics, setTopics] = useState("");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [option, setOption] = useState("Professional");
   const value = useContext(Context);
   const [seo, setSeo] = useState(true);
@@ -64,27 +72,48 @@ function Content() {
               variant="outlined"
               isLoading={thinking}
             >
-              <Image height={30} src={StarImage} />
+              <Wand style = {{
+                height : "20px",
+                width : "20px"
+              }}/>
             </Button>
           </div>
           <div className="">
-            <Textarea
-              size="sm"
-              maxRows={4}
-              onChange={(e) => {
-                setTopics(e.target.value);
-              }}
-              value={topics}
-            />
+            <p
+              onClick={onOpen}
+              className="min-h-12 cursor-pointer p-3 text-small bg-slate-200 rounded-xl max-h-16 overflow-auto"
+            >
+              {topics}
+            </p>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      Edit The Topics
+                    </ModalHeader>
+                    <ModalBody>
+                      <Textarea
+                        maxRows={6}
+                        value={topics}
+                        onValueChange={setTopics}
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        color="secondary"
+                        variant="bordered"
+                        onPress={onClose}
+                      >
+                        Done
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
           </div>
-          <Switch
-            onChange={(e) => {
-              setSeo(!seo);
-            }}
-            color="default"
-            
-            value={seo}
-          >
+          <Switch isSelected={seo} onValueChange={setSeo} color="default">
             SEO Optimised?
           </Switch>
           <div className="flex items-center justify-between">

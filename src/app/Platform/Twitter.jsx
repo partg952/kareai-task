@@ -8,8 +8,9 @@ import Share from "../assets/share.svg";
 import Analytics from "../assets/analytics.svg";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Demo from "../assets/demo.png";
+import ImageActions from "../components/ImageActions";
 import Image from "next/image";
-export default function Twitter({ text, image }) {
+export default function Twitter({ text, image,setImage }) {
   const iconsStyle = {
     height: "20px",
     width: "20px",
@@ -33,7 +34,8 @@ export default function Twitter({ text, image }) {
         </CardHeader>
         <CardBody>
           <p className="text-xs max-h-20 min-h-20 overflow-y-auto">{text}</p>
-          <div className="max-h-72 overflow-y-auto">
+          <ImageActions />
+          <div className="max-h-52 overflow-y-auto">
             <Image
               src={image}
               height={200}
