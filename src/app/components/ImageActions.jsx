@@ -57,7 +57,7 @@ export default function ImageActions({ setImage, feedback, blog }) {
           id="file-picker"
           style={{ display: "none" }}
         />
-        {actions.map((button,i) => {
+        {actions.map((button,i ) => {
           return (
             <Button
               key = {i}
