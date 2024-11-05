@@ -34,7 +34,7 @@ export default function Twitter({ text, image,setImage }) {
         </CardHeader>
         <CardBody>
           <p className="text-xs max-h-20 min-h-20 overflow-y-auto">{text}</p>
-          <ImageActions />
+          <ImageActions setImage={setImage}/>
           <div className="max-h-52 overflow-y-auto">
             <Image
               src={image}

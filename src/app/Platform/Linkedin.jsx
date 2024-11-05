@@ -10,7 +10,7 @@ import CommentRoundedIcon from "@mui/icons-material/Comment";
 import ImageActions from "../components/ImageActions";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import Demo from "../assets/demo.png";
-function Linkedin({ image, text }) {
+function Linkedin({ image, text,setImage}) {
   const value = useContext(Context);
   return (
     <div className="max-w-md ">
@@ -37,7 +37,7 @@ function Linkedin({ image, text }) {
           <div className="h-full max-h-14 text-xs text-ellipsis overflow-y-auto">
             <p className="h-full overflow-hidden">{text}</p>
           </div>
-          <ImageActions />
+          <ImageActions setImage={setImage}/>
           <div className="max-h-56 overflow-y-auto">
             <Image
               width={200}

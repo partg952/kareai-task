@@ -9,7 +9,7 @@ import {
   ModalContent,
   ModalHeader,
   Button,
-  Textarea
+  Textarea,
 } from "@nextui-org/react";
 import { useEffect } from "react";
 import { useContext } from "react";
@@ -22,11 +22,12 @@ export default function Final() {
   const value = useContext(Context);
   const [twitterData, setTwitterData] = useState();
   const [linkedinData, setLinkedinData] = useState();
-  const [isLoading,setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [feedback,setFeedback] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [facebookData, setFacebookData] = useState();
-  const [image, setImage] = useState();
+  const [twitterImage, setTwitterImage] = useState();
+  const [linkedinImage, setLinkedinImage] = useState();
   useEffect(() => {
     console.log(value != undefined && value.finalData);
     value != undefined &&
@@ -42,7 +43,8 @@ export default function Final() {
           )
           .then((res) => {
             console.log(res.data);
-            setImage("data:image/jpg;base64," + res.data.b64_json);
+            setTwitterImage("data:image/jpg;base64," + res.data.b64_json);
+            setLinkedinImage("data:image/jpg;base64," + res.data.b64_json);
           });
         axios
           .post(
@@ -65,10 +67,11 @@ export default function Final() {
       <NextButton
         destRoute={"/Publish"}
         styles={"absolute top-2 right-48 w-24 h-14 text-md  "}
-        data = {{
-          image : image,
-          twitter_post : twitterData,
-          linkedin_post : linkedinData
+        data={{
+          twitterImage: twitterImage,
+          linkedinImage: linkedinImage,
+          twitter_post: twitterData,
+          linkedin_post: linkedinData,
         }}
       />
       <Button
@@ -110,7 +113,9 @@ export default function Final() {
                       )
                       .then((response) => {
                         console.log(response.data);
-                        setImage("data:image/jpg;base64," + response.data.b64_json);
+                        setImage(
+                          "data:image/jpg;base64," + response.data.b64_json
+                        );
                       })
                       .finally(() => {
                         setLoading(false);
@@ -127,13 +132,22 @@ export default function Final() {
       </Modal>
       {twitterData != undefined &&
       linkedinData != undefined &&
-      image != undefined ? (
+      linkedinImage != undefined &&
+      twitterImage != undefined ? (
         <>
           {value.finalData.platform.includes("twitter") && (
-            <Twitter text={twitterData} image={image} setImage={setImage}/>
+            <Twitter
+              text={twitterData}
+              image={twitterImage}
+              setImage={setTwitterImage}
+            />
           )}
           {value.finalData.platform.includes("linkedin") && (
-            <Linkedin text={linkedinData} image={image} />
+            <Linkedin
+              text={linkedinData}
+              image={linkedinImage}
+              setImage={setLinkedinImage}
+            />
           )}
         </>
       ) : (

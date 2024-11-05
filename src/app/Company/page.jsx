@@ -82,7 +82,7 @@ function Company() {
           }
         ));
       
-        Promises.all(allRequests).then((response) => {
+        Promise.all(allRequests).then((response) => {
           console.log(response);
           res("The request is sucessfull!");
         })
