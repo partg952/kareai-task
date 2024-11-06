@@ -57,7 +57,7 @@ function Company() {
           {
             base64_string: obj.file,
             index_name: obj.company,
-            user_email: "koustav@kareai.io",
+            user_email: value.finalData.email,
           }
         )
         .then((response) => {
@@ -72,17 +72,19 @@ function Company() {
   }
   function sendCreateVectorUrlRequest() {
     return new Promise((res, rej) => {
-      const allRequests = urls.map(url => axios
-        .post(
+      const allRequests = urls.map((url) =>
+        axios.post(
           "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/create_vector_url",
           {
             url: url,
             index_name: obj.company,
-            user_email: "koustav@kareai.io",
+            user_email: value.finalData.email,
           }
-        ));
-      
-        Promise.all(allRequests).then((response) => {
+        )
+      );
+
+      Promise.all(allRequests)
+        .then((response) => {
           console.log(response);
           res("The request is sucessfull!");
         })
@@ -222,7 +224,11 @@ function Company() {
           <NextButton
             destRoute={"/Campaign"}
             data={obj}
-            additionalFunction={!(urls.length > 0)  ? sendCreateVectorRequest : sendCreateVectorUrlRequest}
+            additionalFunction={
+              !(urls.length > 0)
+                ? sendCreateVectorRequest
+                : sendCreateVectorUrlRequest
+            }
           />
         </CardBody>
       </Card>

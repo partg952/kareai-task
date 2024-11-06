@@ -12,15 +12,22 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { Context } from "../contextProvider";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 export default function Signin() {
   const [selected, setSelected] = useState("login");
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [signupLoading, setSignupLoading] = useState(false);
   const [loginData, setLoginData] = useState({});
+  const value = useContext(Context);
   const [signupData, setSignupData] = useState({});
+  const router = useRouter();
   return (
     <div className="flex flex-col w-full mx-auto justify-center items-center h-full">
-      <ToastContainer/>
+      <ToastContainer />
       <Card className="max-w-full w-[340px] h-[400px]">
         <CardBody className="overflow-hidden">
           <Tabs
@@ -65,8 +72,10 @@ export default function Signin() {
                 <div className="flex gap-2 justify-end">
                   <Button
                     fullWidth
+                    isLoading={loginLoading}
                     color="primary"
                     onPress={(e) => {
+                      setLoginLoading(true);
                       axios
                         .post(
                           "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/login",
@@ -74,10 +83,15 @@ export default function Signin() {
                         )
                         .then((res) => {
                           console.log(res.data);
+                          value.addData({ ...value.finalData, ...loginData });
+                          router.push("/Company");
                         })
                         .catch((err) => {
                           console.log(err.response.data.detail);
-                          toast(err.response.data.detail)
+                          toast(err.response.data.detail);
+                        })
+                        .finally(() => {
+                          setLoginLoading(false);
                         });
                     }}
                     type="submit"
@@ -118,14 +132,25 @@ export default function Signin() {
                   <Button
                     fullWidth
                     color="primary"
+                    isLoading={signupLoading}
                     onPress={(e) => {
+                      setSignupLoading(true);
                       axios
                         .post(
                           "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/signup",
                           signupData
                         )
                         .then((res) => {
-                          console.log(res.data);
+                            value.addData({...value.finalData,...signupData});
+                            router.push("/Company");
+                        })
+                        .catch((err) => {
+                          console.log(err.response.data.detail);
+
+                          toast(err.response.data.detail);
+                        })
+                        .finally(() => {
+                          setSignupLoading(false);
                         });
                     }}
                   >

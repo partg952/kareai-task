@@ -1,6 +1,23 @@
 "use client";
 import React from "react";
-import {Card,CardBody,Switch,Dropdown,DropdownItem,DropdownTrigger,DropdownMenu,Button,Calendar,Modal,ModalHeader,ModalFooter,ModalContent,ModalBody,useDisclosure,TimeInput,} from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  Switch,
+  Dropdown,
+  DropdownItem,
+  DropdownTrigger,
+  DropdownMenu,
+  Button,
+  Calendar,
+  Modal,
+  ModalHeader,
+  ModalFooter,
+  ModalContent,
+  ModalBody,
+  useDisclosure,
+  TimeInput,
+} from "@nextui-org/react";
 import NextButton from "../components/NextButton";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -79,15 +96,14 @@ function Publish() {
             Choose date and time to publish your poet.You can change your
             timezone in the profile settings
           </p>
-         
+
           <div className="w-full flex items-center justify-center">
             <Button
               color="secondary"
               className="size-2 w-full text-sm my-5"
               onPress={onOpen}
-              
             >
-              {date!=undefined ? date.toString() : "Add Date"}
+              {date != undefined ? date.toString() : "Add Date"}
             </Button>
           </div>
           <p className="mx-auto my-5 text-sm">
@@ -125,47 +141,46 @@ function Publish() {
             }}
             additionalFunction={() => {
               const all_db_paths = [
-               {
-                path : "add_company",
-                body : {
-                  user_email : "koustav@kareai.io",
-                  company_name : value.finalData.company
-                }
-               },
-               {
-                path : "add_product",
-                body : {
-                  user_email : "koustav@kareai.io",
-                  product_name : value.finalData.product
-                }
-               },
-               {
-                path : "add_campaign",
-                body : {
-                  user_email : "koustav@kareai.io",
-                  product_name : value.finalData.product,
-                  campaign : value.finalData.objective
-                }
-               },
-               {
-                path : "add_blog",
-                body : {
-                  user_email : "koustav@kareai.io",
-                  company : value.finalData.company,
-                  product : value.finalData.product,
-                  campaign : value.finalData.objective,
-                  topics :value.finalData.topics,
-                  audience : value.finalData.targetAudience,
-                  content : value.finalData.blog
-                }
-               },
-               {
-                path : "add_post",
-                body : {
-                  user_email : "koustav@kareai.io",
-                  
-                } 
-               }
+                {
+                  path: "add_company",
+                  body: {
+                    user_email: value.finalData.email,
+                    company_name: value.finalData.company,
+                  },
+                },
+                {
+                  path: "add_product",
+                  body: {
+                    user_email: value.finalData.email,
+                    product_name: value.finalData.product,
+                  },
+                },
+                {
+                  path: "add_campaign",
+                  body: {
+                    user_email: value.finalData.email,
+                    product_name: value.finalData.product,
+                    campaign: value.finalData.objective,
+                  },
+                },
+                {
+                  path: "add_blog",
+                  body: {
+                    user_email: value.finalData.email,
+                    company: value.finalData.company,
+                    product: value.finalData.product,
+                    campaign: value.finalData.objective,
+                    topics: value.finalData.topics,
+                    audience: value.finalData.targetAudience,
+                    content: value.finalData.blog,
+                  },
+                },
+                {
+                  path: "add_post",
+                  body: {
+                    user_email: value.finalData.email,
+                  },
+                },
               ];
             }}
           />
