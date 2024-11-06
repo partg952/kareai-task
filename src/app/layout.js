@@ -38,7 +38,8 @@ export default function RootLayout({ children }) {
       >
         <NextUIProvider>
           <ContextProvider>
-            {!pathname.includes("/ScheduledPosts") ? <Header /> : 
+            {!(pathname.includes("/login"))&&<Header/>}
+            {!(pathname.includes("/ScheduledPosts")) ? <Header /> : 
             <div className={headerStyles.headerWrapper}>
                 <p className="text-xl text-center my-5"><b>Manage Scheduled Posts</b></p>
               </div>}
