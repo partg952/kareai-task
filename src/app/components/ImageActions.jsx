@@ -33,6 +33,7 @@ export default function ImageActions({ setImage, blog }) {
       buttonName: "regenerate-image",
       buttonIcon: Refresh,
       buttonFunction: () => {
+        setImage(undefined);
         axios
           .post(
             "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/generate_blog_images",
@@ -79,6 +80,7 @@ export default function ImageActions({ setImage, blog }) {
                   onPress={() => {
                     if (feedback.length != 0) {
                       setLoading(true);
+                      
                       axios
                         .post(
                           "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/generate_images_by_user",

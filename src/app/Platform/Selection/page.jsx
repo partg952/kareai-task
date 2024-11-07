@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React from "react";
-import {Card,CardBody,Checkbox,CheckboxGroup} from '@nextui-org/react';
+import { Card, CardBody, Checkbox, CheckboxGroup } from "@nextui-org/react";
 import NextButton from "@/app/components/NextButton";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useState } from "react";
 export default function Selection() {
-  const [checkBoxData,setData] = useState([]);
+  const [checkBoxData, setData] = useState([]);
   return (
     <div>
       <Card className=" max-w-sm p-4 md:max-w-lg">
@@ -25,8 +26,13 @@ export default function Selection() {
             onChange={(e) => {
               setData(e);
             }}
+            className="w-full"
           >
-            <Checkbox value="twitter">X</Checkbox>
+            <Checkbox value="twitter">
+              <div>
+                <p>X</p>
+              </div>
+            </Checkbox>
             <Checkbox value="linkedin">Linkedin</Checkbox>
           </CheckboxGroup>
           <NextButton

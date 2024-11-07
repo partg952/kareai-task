@@ -18,11 +18,14 @@ import DropdownComp from "../components/DropdownComp";
 import SelectOptions from "../components/SelectOptions";
 import NextButton from "../components/NextButton";
 import axios from "axios";
+import { useContext } from "react";
+import {Context} from '../contextProvider'
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { Reem_Kufi } from "next/font/google";
 function Company() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [company, setCompany] = useState("Select a Company");
+  const value = useContext(Context);
   const [product, setProduct] = useState("Select a Product");
   const [companies, setCompanies] = useState([]);
   const filePicker = useRef();

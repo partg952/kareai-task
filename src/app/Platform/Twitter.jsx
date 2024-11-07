@@ -36,12 +36,12 @@ export default function Twitter({ text, image,setImage }) {
           <p className="text-xs max-h-20 min-h-20 overflow-y-auto">{text}</p>
           <ImageActions setImage={setImage}/>
           <div className="max-h-52 overflow-y-auto">
-            <Image
+            {image!=undefined ? <Image
               src={image}
               height={200}
               width={200}
               className="w-full rounded-xl my-2"
-            />
+            /> : <div className="h-52"><p>Loading...</p></div>}
           </div>
         </CardBody>
         <CardFooter>

@@ -74,66 +74,10 @@ export default function Final() {
           linkedin_post: linkedinData,
         }}
       />
-      <Button
-        variant="bordered"
-        color="secondary"
-        className="absolute top-0.5 right-8 h-14 w-30 text-md z-50 bg-white  "
-        onPress={onOpen}
-      >
-        Regen Image
-      </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader>Review and Regenerate Image</ModalHeader>
-              <ModalBody>
-                <Textarea
-                  onChange={(e) => {
-                    setFeedback(e.target.value);
-                  }}
-                  contentEditable={true}
-                  value={feedback}
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="secondary"
-                  variant="bordered"
-                  isLoading={isLoading}
-                  onPress={() => {
-                    setLoading(true);
-                    axios
-                      .post(
-                        "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/generate_images_by_user",
-                        {
-                          prompt: feedback,
-                          size: "1024x1024",
-                        }
-                      )
-                      .then((response) => {
-                        console.log(response.data);
-                        setImage(
-                          "data:image/jpg;base64," + response.data.b64_json
-                        );
-                      })
-                      .finally(() => {
-                        setLoading(false);
-                        onClose();
-                      });
-                  }}
-                >
-                  Regenerate
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+     
+      
       {twitterData != undefined &&
-      linkedinData != undefined &&
-      linkedinImage != undefined &&
-      twitterImage != undefined ? (
+      linkedinData != undefined ? (
         <>
           {value.finalData.platform.includes("twitter") && (
             <Twitter
