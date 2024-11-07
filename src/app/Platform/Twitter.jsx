@@ -6,11 +6,12 @@ import Like from "../assets/like.svg";
 import Retweet from "../assets/retweet.svg";
 import Share from "../assets/share.svg";
 import Analytics from "../assets/analytics.svg";
+import XIcon from "@mui/icons-material/X";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import Demo from "../assets/demo.png";
 import ImageActions from "../components/ImageActions";
 import Image from "next/image";
-export default function Twitter({ text, image,setImage }) {
+export default function Twitter({ text, image, setImage }) {
   const iconsStyle = {
     height: "20px",
     width: "20px",
@@ -18,8 +19,13 @@ export default function Twitter({ text, image,setImage }) {
   return (
     <div className="max-w-md">
       <Card className="overflow-hidden">
-        <CardHeader>
-          <div className="flex justify-between">
+        <CardHeader className="flex-col">
+          <div className="m-2 bg-black w-full flex items-center justify-center rounded-xl p-3 ">
+            <XIcon style={{ color: "white" }} />
+          </div>
+        </CardHeader>
+        <CardBody>
+          <div className="flex justify-start mx-3 my-1">
             <AccountBoxRoundedIcon
               style={{
                 height: "30px",
@@ -31,17 +37,21 @@ export default function Twitter({ text, image,setImage }) {
               <p className="text-slate-300">@username</p>
             </div>
           </div>
-        </CardHeader>
-        <CardBody>
           <p className="text-xs max-h-20 min-h-20 overflow-y-auto">{text}</p>
-          <ImageActions setImage={setImage}/>
+          <ImageActions setImage={setImage} />
           <div className="max-h-52 overflow-y-auto">
-            {image!=undefined ? <Image
-              src={image}
-              height={200}
-              width={200}
-              className="w-full rounded-xl my-2"
-            /> : <div className="h-52"><p>Loading...</p></div>}
+            {image != undefined ? (
+              <Image
+                src={image}
+                height={200}
+                width={200}
+                className="w-full rounded-xl my-2"
+              />
+            ) : (
+              <div className="h-52">
+                <p>Loading...</p>
+              </div>
+            )}
           </div>
         </CardBody>
         <CardFooter>

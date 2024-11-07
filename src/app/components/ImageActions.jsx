@@ -61,7 +61,7 @@ export default function ImageActions({ setImage, blog }) {
   ];
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
@@ -80,7 +80,7 @@ export default function ImageActions({ setImage, blog }) {
                   onPress={() => {
                     if (feedback.length != 0) {
                       setLoading(true);
-                      
+
                       axios
                         .post(
                           "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/generate_images_by_user",
@@ -93,9 +93,8 @@ export default function ImageActions({ setImage, blog }) {
                           setLoading(false);
                           onClose();
                         });
-                    }
-                    else {
-                      toast("Please Enter a Prompt to Generate The Image")
+                    } else {
+                      toast("Please Enter a Prompt to Generate The Image");
                     }
                   }}
                 >
@@ -115,9 +114,8 @@ export default function ImageActions({ setImage, blog }) {
             var fileReader = new FileReader();
             fileReader.onload = () => {
               setImage(fileReader.result);
-            }
+            };
             fileReader.readAsDataURL(e.target.files[0]);
-            
           }}
           id="file-picker"
           style={{ display: "none" }}
