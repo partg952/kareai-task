@@ -38,7 +38,7 @@ export default function Final() {
             "https://marketing-agent.delightfulflower-b5c85228.eastus2.azurecontainerapps.io/api/generate_blog_images",
             {
               blog: value.finalData.blog,
-              size: "7",
+              size: "1024x1024",
             }
           )
           .then((res) => {
